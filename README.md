@@ -60,6 +60,41 @@ Let's create a file called `nginx.yml` and write our first playbook:
 
     - name: install nginx
       apt: name=nginx state=present
+```
+Now we should be able to execute it on our nodes:
+```
+$ ansible-playbook -i hosts nginx.yml
+```
+
+Just to be sure, check if nginx is really working:
+```
+$ http node01
+$ http node02
+$ http node03
+```
+You should be able to see default nginx page, pretty boring, right?
+
+### Templates
+Create a directory `templates` and file `index.html.j2`:
+```
+$ mkdir templates
+$ vi templates/index.html.j2
+```
+
+```
+Hello from {{ansible_hostname}}!
+```
+
+then edit our playbook and add another task:
+```
+---
+- hosts: all
+  tasks:
+    - name: update apt cache
+      apt: update_cache=yes
+
+    - name: install nginx
+      apt: name=nginx state=present
 
     - name: change index.html
       template: 
@@ -69,7 +104,8 @@ Let's create a file called `nginx.yml` and write our first playbook:
         group: root
         mode: 0755
 ```
-Now we should be able to execute it on our nodes:
+and execute it!
 ```
 $ ansible-playbook -i hosts nginx.yml
 ```
+Yay, now our configuration is depending on a variable (remember the gathering facts part?). 
