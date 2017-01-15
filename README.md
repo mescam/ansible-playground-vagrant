@@ -116,3 +116,66 @@ Install `DavidWittman.redis` role from Ansible Galaxy
 $ sudo ansible-galaxy install DavidWittman.redis
 ```
 
+Rewrite our inventory:
+```
+$ vi hosts
+```
+```
+[redis-master]
+node01
+
+[redis-slave]
+node[02:03]
+```
+
+Then create a new playbook:
+```
+$ vi redis.yml
+```
+
+```
+---
+- name: configure the master redis server
+  hosts: redis-master
+  roles:
+    - DavidWittman.redis
+
+- name: configure redis slaves
+  hosts: redis-slave
+  vars:
+    - redis_slaveof: node01 6379
+  roles:
+    - DavidWittman.redis
+```
+
+Our playbook is ready to execute, it will take some time :)
+```
+$ ansible-playbook -i hosts redis.yml
+```
+
+All green? Let's test it!
+
+```
+vagrant@manager:~$ redis-cli -h node01
+node01:6379> set foo bar
+OK
+node01:6379> get foo
+"bar"
+node01:6379> 
+vagrant@manager:~$ redis-cli -h node02
+node02:6379> get foo
+"bar"
+node02:6379> 
+vagrant@manager:~$ redis-cli -h node03
+node03:6379> get foo
+"bar"
+node03:6379> set foo none
+(error) READONLY You can't write against a read only slave.
+node03:6379> 
+```
+
+# Author
+Jakub Woźniak 
+
+#### Credits
+Dariusz Dwornikowski @tdi
