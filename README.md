@@ -15,6 +15,7 @@ Provided Vagrantfile will setup 4 virtual machines (1 manager, 3 managed nodes)
 Provisioning scripts will install ansible on manager vm, setup passwordless authentication between manager and nodes and add some entries to hosts file, so you can use domain names and forget about IP addresses.
 
 ## Let's play
+### Setup
 ```
 $ vagrant up
 $ vagrant ssh manager
@@ -46,4 +47,10 @@ ansible -i hosts -m ping all
 and gather some facts about nodes:
 ```
 ansible -i hosts -m setup all
+```
+
+### First playbook
+Let's create a file called `nginx.yml` and write our first playbook:
+```
+---
 ```
