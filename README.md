@@ -109,3 +109,10 @@ and execute it!
 $ ansible-playbook -i hosts nginx.yml
 ```
 Yay, now our configuration is depending on a variable (remember the gathering facts part?). 
+
+### Ansible Galaxy and roles
+Install `DavidWittman.redis` role from Ansible Galaxy
+```
+$ sudo ansible-galaxy install DavidWittman.redis
+```
+
