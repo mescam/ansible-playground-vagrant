@@ -53,4 +53,23 @@ ansible -i hosts -m setup all
 Let's create a file called `nginx.yml` and write our first playbook:
 ```
 ---
+- hosts: all
+  tasks:
+    - name: update apt cache
+      apt: update_cache=yes
+
+    - name: install nginx
+      apt: name=nginx state=present
+
+    - name: change index.html
+      template: 
+        src: index.html.j2 
+        dest: /usr/share/nginx/html/index.html
+        owner: root
+        group: root
+        mode: 0755
+```
+Now we should be able to execute it on our nodes:
+```
+$ ansible-playbook -i hosts nginx.yml
 ```
