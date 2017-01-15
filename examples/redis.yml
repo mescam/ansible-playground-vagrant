@@ -1,0 +1,12 @@
+---
+- name: configure the master redis server
+  hosts: redis-master
+  roles:
+    - DavidWittman.redis
+
+- name: configure redis slaves
+  hosts: redis-slave
+  vars:
+    - redis_slaveof: node01 6379
+  roles:
+    - DavidWittman.redis
