@@ -174,7 +174,7 @@ node03:6379> set foo none
 node03:6379> 
 ```
 
-# Author
+## Author
 Jakub Woźniak 
 
 #### Credits
