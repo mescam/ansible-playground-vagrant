@@ -1,7 +1,19 @@
 # ansible-playground-vagrant
 
+## Infrastructure as Code
+Infrastructure as Code (IaC) is the process of managing and provisioning computing infrastructure (processes, bare-metal servers, virtual servers, etc.) and their configuration through machine-processable definition files, rather than physical hardware configuration or the use of interactive configuration tools. The definition files may be in a version control system. This has been achieved previously through either scripts or declarative definitions, rather than manual processes, but developments as specifically titled 'IaC' are now focused on the declarative approaches.
+
+[Source: wikipedia](https://en.wikipedia.org/wiki/Infrastructure_as_Code)
+
 ## About Ansible
 Ansible is an automation engine used for provisioning, configuration management and deployments. Ansible uses an agentless architecture, which means that you don't have to install any additional software on your nodes. To manage your nodes with ansible, you will need a working SSH daemon and Python interpreter.
+
+## Ansible vs Rest of the World
+Software | Ansible | Puppet | Chef | Salt
+-------- | ------- | ------ | ---- | ----
+Language | Python | Ruby | Ruby/Erlang | Python
+Agent | No | Yes | Yes  | Yes (not required)
+Infrastructure described in | Yaml | Puppet's declarative language | Ruby DSL | Python/JSON/Yaml
 
 ## Vagrant environment
 Provided Vagrantfile will setup 4 virtual machines (1 manager, 3 managed nodes)
