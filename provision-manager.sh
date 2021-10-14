@@ -1,6 +1,7 @@
 #!/bin/bash
 
 export DEBIAN_FRONTEND=noninteractive
+apt-get update
 apt-get install -y python-pip libssl-dev build-essential libffi-dev libpython-dev httpie redis-tools
 pip install --upgrade pip
 pip install ansible
