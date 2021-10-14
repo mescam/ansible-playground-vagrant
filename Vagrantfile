@@ -13,7 +13,7 @@ File.open("./hosts", 'w') { |file|
 
 Vagrant.configure("2") do |config|
     config.vm.define "manager" do |i|
-        i.vm.box = "ubuntu/trusty64"
+        i.vm.box = "hashicorp/bionic64"
         i.vm.hostname = "manager"
         i.vm.network "private_network", ip: "192.168.10.2"
         i.vm.provision "shell", path: "./provision-manager.sh"
@@ -21,7 +21,7 @@ Vagrant.configure("2") do |config|
 
     instances.each do |instance|
         config.vm.define instance[:name] do |i|
-            i.vm.box = "ubuntu/trusty64"
+            i.vm.box = "hashicorp/bionic64"
             i.vm.hostname = instance[:name]
             i.vm.network "private_network", ip: "#{instance[:ip]}"
             i.vm.provision "shell", path: "./provision.sh"
